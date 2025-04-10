@@ -1,6 +1,9 @@
-use crate::parser::{Diagnostic, Span};
 use codespan_reporting::diagnostic::Label;
 use logos::Logos;
+
+// TODO: change definition and all uses if codespan_reporting is not used
+pub type Diagnostic = codespan_reporting::diagnostic::Diagnostic<()>;
+type Span = core::ops::Range<usize>;
 
 #[derive(Debug, Clone, PartialEq, Default)]
 pub enum LexerError {

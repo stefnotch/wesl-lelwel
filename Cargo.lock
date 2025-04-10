@@ -32,8 +32,16 @@ checksum = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
 
 [[package]]
 name = "lelwel"
-version = "0.7.1"
-source = "git+https://github.com/0x2a-42/lelwel.git#22c48ddbfd2637035b30d88b26f6383e4cf31791"
+version = "0.8.0"
+source = "git+https://github.com/0x2a-42/lelwel.git#dd5bf61b065a29fd45f912eab77b37157759f367"
+dependencies = [
+ "codespan-reporting",
+ "logos",
+]
+
+[[package]]
+name = "lexer"
+version = "0.1.0"
 dependencies = [
  "codespan-reporting",
  "logos",
@@ -150,7 +158,7 @@ version = "0.1.0"
 dependencies = [
  "codespan-reporting",
  "lelwel",
- "logos",
+ "lexer",
 ]
 
 [[package]]

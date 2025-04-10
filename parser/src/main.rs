@@ -1,5 +1,3 @@
-#![cfg_attr(test, allow(warnings))]
-mod lexer;
 mod parser;
 
 use codespan_reporting::files::SimpleFile;
@@ -38,8 +36,8 @@ mod tests {
     fn parse_file(source: &str) {
         let mut diags = vec![];
         let cst = Parser::parse(&source, &mut diags);
-        let writer = StandardStream::stderr(ColorChoice::Auto);
-        writeln!(&mut writer.lock(), "{cst}");
+        let mut writer = StandardStream::stderr(ColorChoice::Auto);
+        writeln!(writer, "{cst}").unwrap();
         let file = SimpleFile::new("test file", &source);
         let config = Config::default();
         for diag in diags.iter() {
@@ -51,7 +49,8 @@ mod tests {
     fn nya() {
         parse_file(
             "fn foo () {
-        let a = 1;
+        let a = 100;
+        let b = c();
         }",
         );
     }

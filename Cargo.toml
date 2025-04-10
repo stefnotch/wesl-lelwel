@@ -1,11 +1,3 @@
-[package]
-edition = "2024"
-name = "wesl-lelwel"
-version = "0.1.0"
-
-[dependencies]
-codespan-reporting = "0.11"
-logos = "0.15"
-
-[build-dependencies]
-lelwel = { git = "https://github.com/0x2a-42/lelwel.git" }
+[workspace]
+members = ["lexer", "parser"]
+resolver = "3"
