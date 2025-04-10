@@ -1,0 +1,34 @@
+token Fn='fn' Let='let' Return='return' True='true' False='false';
+token Arrow='->' LPar='(' RPar=')' Comma=',' Colon=':' LBrace='{' RBrace='}'
+      Semi=';' Asn='=' Plus='+' Minus='-' Star='*' Slash='/';
+token Name='<name>' Int='<int>';
+token Whitespace;
+
+skip Whitespace;
+
+start file;
+
+file: fn*;
+fn: 'fn' Name param_list ['->' type_expr] block;
+param_list: '(' [param (?1 ',' param)* [',']] ')';
+param: Name ':' type_expr;
+type_expr: Name;
+block: '{' stmt* '}';
+stmt^:
+  stmt_expr
+| stmt_let
+| stmt_return
+;
+stmt_expr: expr ';';
+stmt_let: 'let' Name '=' expr ';';
+stmt_return: 'return' [expr] ';';
+expr:
+  expr ('*' | '/') expr @expr_binary
+| expr ('+' | '-') expr @expr_binary
+| expr arg_list @expr_call
+| Name @expr_name
+| '(' expr ')' @expr_paren
+| expr_literal ^
+;
+expr_literal: Int | 'true' | 'false';
+arg_list: '(' [expr (?1 ',' expr)* [',']] ')';
